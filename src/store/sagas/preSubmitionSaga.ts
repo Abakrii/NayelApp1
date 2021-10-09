@@ -7,13 +7,23 @@ import {
 } from '../actions/actionTypes';
 import {successResponse, failedResponse} from '../../network/responseStatus';
 import {sendPreSubmitDataRequest} from '../../network/Apis';
+import {getDBConnection, saveFormItems} from '../../network/db-service';
 
+const addItemsToDb = async ({payloadItems}: any) => {
+  try {
+    const db = await getDBConnection();
+    await saveFormItems(db, payloadItems);
+  } catch (error) {
+    return error;
+  }
+};
 function* sendPreSubmitData(action: any) {
   const {payload = {}} = action;
   try {
     let result = yield sendPreSubmitDataRequest(payload);
     const {status} = result;
     if (successResponse.includes(status)) {
+      addItemsToDb({payloadItems: payload});
       yield put({
         type: SEND_PRE_SUBMITION_DATA_REQUEST_SUCCESS,
       });

@@ -52,7 +52,6 @@ const PreSubmition = ({navigation}: any) => {
     }
   }, [holeData]);
 
-  console.log('afterSumbitionRequestIsLoading', afterSumbitionRequestIsLoading);
   return preSubmitionRequestIsLoading || afterSumbitionRequestIsLoading ? (
     <Loader />
   ) : (

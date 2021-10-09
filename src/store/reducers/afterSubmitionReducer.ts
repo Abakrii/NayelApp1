@@ -11,7 +11,6 @@ const initialState = {
 };
 
 export const afterSubmitionReducer = (state = initialState, action: any) => {
-  console.log('action in reducer', action);
   switch (action.type) {
     case GET_AFTER_SUBMITION_DATA_REQUEST:
       return {
