@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, TextInput} from 'react-native';
 
-const FormScreen = () => {
+const PreSubmition = () => {
   const [value, onChangeText] = React.useState('Useless Multiline asdasdsad');
   return (
     <View
@@ -21,4 +21,4 @@ const FormScreen = () => {
   );
 };
 
-export default FormScreen;
+export default PreSubmition;
