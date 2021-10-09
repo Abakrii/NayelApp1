@@ -1,4 +1,4 @@
-package com.nayelapp;
+package com.problem3;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "NayelApp";
+    return "Problem3";
   }
 }
