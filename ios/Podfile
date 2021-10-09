@@ -12,6 +12,10 @@ target 'Problem3' do
     :hermes_enabled => false
   )
 
+  pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
+
+  pod 'RNCCheckbox', :path => '../node_modules/@react-native-community/checkbox'
+
   target 'Problem3Tests' do
     inherit! :complete
     # Pods for testing
