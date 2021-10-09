@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
   buttonView: {
     paddingTop: 100,
   },
+  textError: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red',
+  },
 });
 
 export default styles;

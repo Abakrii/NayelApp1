@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, TextInput, Button, Text} from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
-import {Picker} from '@react-native-picker/picker';
+import {View} from 'react-native';
 import styles from './styels';
 import {Content, Loader} from '../../core/components';
 import {useDispatch} from 'react-redux';
@@ -10,21 +8,21 @@ import {preSubmitSelector} from '../../store/selectors/preSubmitSelector';
 import {afterSubmitSelector} from '../../store/selectors/afterSubmitSelector';
 import {POST_SUBMITION} from '../../navigations/config';
 import {getAfterSubmitionData} from '../../store/actions/afterSubmitionActions';
+import {
+  EmailAddress,
+  IsJokeCheckBox,
+  PublisherTypePicker,
+  Description,
+  SubmitButton,
+} from './components';
+import {PublisherTypes} from './components/publisherTypePicker/interfaces';
 const PreSubmition = ({navigation}: any) => {
-  const {
-    mainView,
-    textView,
-    checkboxContainer,
-    checkbox,
-    checkboxLabel,
-    pickerView,
-    descriptionStyle,
-    buttonView,
-  } = styles || {};
-  const [email, onChangeMail] = useState('');
-  const [isJoke, setIsJokeCheckBox] = useState(false);
-  const [publisherType, setPublisherType] = useState('');
-  const [description, setDescription] = useState('');
+  const {mainView} = styles || {};
+  const {TEACHER} = PublisherTypes;
+  const [email, onChangeMail]: any = useState('');
+  const [isJoke, setIsJokeCheckBox]: any = useState(false);
+  const [publisherType, setPublisherType]: any = useState(TEACHER);
+  const [description, setDescription]: any = useState('');
   const dispatch = useDispatch();
   const onClickSubmit = () => {
     let data = {email, isJoke, publisherType, description};
@@ -52,54 +50,51 @@ const PreSubmition = ({navigation}: any) => {
     }
   }, [holeData]);
 
+  const isNextButtonDisabled = () => {
+    return !email || !description || !isCorrectEmailAddress;
+  };
+
+  const emailAddressValidation = () => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(email) === false) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const onChangeDescription = (value: any) => {
+    let desc = value.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    setDescription(desc);
+  };
+
+  const isCorrectEmailAddress = emailAddressValidation();
+
+  const disableNextButton = isNextButtonDisabled();
   return preSubmitionRequestIsLoading || afterSumbitionRequestIsLoading ? (
     <Loader />
   ) : (
     <View style={mainView}>
       <Content>
-        <View style={textView}>
-          <TextInput
-            multiline
-            onChangeText={text => onChangeMail(text)}
-            value={email}
-            placeholder={'please enter your email address'}
-          />
-        </View>
-        <View style={checkboxContainer}>
-          <CheckBox
-            disabled={false}
-            value={isJoke}
-            onValueChange={newValue => setIsJokeCheckBox(newValue)}
-            style={checkbox}
-          />
-          <Text style={checkboxLabel}>Is Joke?</Text>
-        </View>
+        <EmailAddress
+          email={email}
+          onChangeMail={onChangeMail}
+          isCorrectEmailAddress={isCorrectEmailAddress}
+        />
+        <IsJokeCheckBox isJoke={isJoke} setIsJokeCheckBox={setIsJokeCheckBox} />
 
-        <Picker
-          selectedValue={publisherType}
-          style={pickerView}
-          onValueChange={itemValue => setPublisherType(itemValue)}>
-          <Picker.Item label="Teacher" value="Teacher" />
-          <Picker.Item label="Blogger" value="Blogger" />
-        </Picker>
-        <View style={textView}>
-          <TextInput
-            multiline
-            numberOfLines={4}
-            onChangeText={text => setDescription(text)}
-            value={description}
-            style={descriptionStyle}
-            placeholder={'please enter your description'}
-          />
-        </View>
-        <View style={buttonView}>
-          <Button
-            disabled={false}
-            title={'Submit the form'}
-            color="coral"
-            onPress={onClickSubmit}
-          />
-        </View>
+        <PublisherTypePicker
+          publisherType={publisherType}
+          setPublisherType={setPublisherType}
+        />
+        <Description
+          description={description}
+          setDescription={onChangeDescription}
+        />
+        <SubmitButton
+          disableNextButton={disableNextButton}
+          onClickSubmit={onClickSubmit}
+        />
       </Content>
     </View>
   );
