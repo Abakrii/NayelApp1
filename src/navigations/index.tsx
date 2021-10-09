@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {PreSubmition, PostSubmition} from '../features';
+import {PreSubmition, AfterSubmition} from '../features';
 import {PRE_SUBMITION, POST_SUBMITION} from './config';
 import {HEADER_STYLE_OBJECT} from '../core/constants/headerStyleObj';
 const Stack = createStackNavigator();
@@ -16,7 +16,7 @@ const NavigationStack = () => {
         />
         <Stack.Screen
           name={POST_SUBMITION}
-          component={PostSubmition}
+          component={AfterSubmition}
           options={HEADER_STYLE_OBJECT}
         />
       </Stack.Navigator>
