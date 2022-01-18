@@ -1,7 +1,7 @@
 import React from 'react';
-
 import {View, Button} from 'react-native';
-import styles from '../../styels';
+import {colors} from '../../../../core/constants/colors';
+import styles from './styles';
 import {SubmitButtonProps} from './interfaces';
 const SubmitButton = ({
   disableNextButton,
@@ -13,7 +13,7 @@ const SubmitButton = ({
       <Button
         disabled={disableNextButton}
         title={'Submit the form'}
-        color="coral"
+        color={colors.coral}
         onPress={onClickSubmit}
       />
     </View>

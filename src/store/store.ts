@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas/rootSaga';
-import rootReducer from './reducers/rootReducer';
+import rootSaga from './rootSaga';
+import rootReducer from './rootReducer';
 // import { logger } from 'redux-logger'
 /* Hot Module Reload */
 

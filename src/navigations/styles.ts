@@ -1,6 +1,6 @@
-import {colors} from './colors';
+import {colors} from '../core/constants/colors';
 
-export const HEADER_STYLE_OBJECT: any = {
+export const HeaderStyle: any = {
   title: 'Pre Submition Form',
   headerStyle: {
     height: 80,

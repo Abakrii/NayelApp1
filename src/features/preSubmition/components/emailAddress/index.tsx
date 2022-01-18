@@ -1,25 +1,26 @@
 import React from 'react';
-import {View, TextInput, Text} from 'react-native';
-import styles from '../../styels';
+import {TextInput, Text} from 'react-native';
+import {ViewWrapper} from '../../../../core/components';
+import styles from './styles';
 import {EmailAddressProps} from './interfaces';
 const EmailAddress = ({
   email,
   onChangeMail,
   isCorrectEmailAddress,
 }: EmailAddressProps) => {
-  const {textView, textError} = styles;
+  const {textError} = styles;
   return (
-    <View style={textView}>
+    <ViewWrapper>
       <TextInput
         multiline
         onChangeText={onChangeMail}
         value={email}
         placeholder={'please enter your email address'}
       />
-      {!isCorrectEmailAddress && (
+      {!!email && !isCorrectEmailAddress && (
         <Text style={textError}>Please Enter a valid email adderss</Text>
       )}
-    </View>
+    </ViewWrapper>
   );
 };
 export default EmailAddress;

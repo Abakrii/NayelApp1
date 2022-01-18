@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, FC} from 'react';
 import {View} from 'react-native';
 import styles from './styels';
 import {Content, Loader} from '../../core/components';
 import {useDispatch} from 'react-redux';
-import {sendPreSumbitionData} from '../../store/actions/preSubmitionActions';
-import {preSubmitSelector} from '../../store/selectors/preSubmitSelector';
-import {afterSubmitSelector} from '../../store/selectors/afterSubmitSelector';
+import {sendPreSumbitionData} from './store/actions';
+import {preSubmitSelector} from './store/selectores';
 import {POST_SUBMITION} from '../../navigations/config';
-import {getAfterSubmitionData} from '../../store/actions/afterSubmitionActions';
 import {
   EmailAddress,
   IsJokeCheckBox,
@@ -16,13 +14,18 @@ import {
   SubmitButton,
 } from './components';
 import {PublisherTypes} from './components/publisherTypePicker/interfaces';
-const PreSubmition = ({navigation}: any) => {
+import {emailAddressValidation} from './utils/validations';
+import {useNavigation} from '@react-navigation/native';
+import {afterSubmitSelector} from '../afterSubmition/store/selectors';
+import {getAfterSubmitionData} from '../afterSubmition/store/actions';
+const PreSubmition: FC = (): JSX.Element => {
+  const {navigate} = useNavigation();
   const {mainView} = styles || {};
   const {TEACHER} = PublisherTypes;
-  const [email, onChangeMail]: any = useState('');
-  const [isJoke, setIsJokeCheckBox]: any = useState(false);
-  const [publisherType, setPublisherType]: any = useState(TEACHER);
-  const [description, setDescription]: any = useState('');
+  const [email, onChangeMail] = useState('');
+  const [isJoke, setIsJokeCheckBox] = useState(false);
+  const [publisherType, setPublisherType] = useState(TEACHER);
+  const [description, setDescription] = useState('');
   const dispatch = useDispatch();
   const onClickSubmit = () => {
     let data = {email, isJoke, publisherType, description};
@@ -33,10 +36,8 @@ const PreSubmition = ({navigation}: any) => {
     navigateToAfterSubmitionScreen = false,
   } = preSubmitSelector();
 
-  const {
-    afterSumbitionRequestIsLoading = false,
-    holeData = [],
-  } = afterSubmitSelector();
+  const {afterSumbitionRequestIsLoading = false, holeData = []} =
+    afterSubmitSelector();
 
   useEffect(() => {
     if (navigateToAfterSubmitionScreen) {
@@ -46,7 +47,7 @@ const PreSubmition = ({navigation}: any) => {
 
   useEffect(() => {
     if (holeData.length > 0) {
-      navigation.navigate(POST_SUBMITION);
+      navigate(POST_SUBMITION as never);
     }
   }, [holeData]);
 
@@ -54,24 +55,19 @@ const PreSubmition = ({navigation}: any) => {
     return !email || !description || !isCorrectEmailAddress;
   };
 
-  const emailAddressValidation = () => {
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-    if (reg.test(email) === false) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const onChangeDescription = (value: any) => {
+  const onChangeDescription = (value: string) => {
     let desc = value.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
     setDescription(desc);
   };
 
-  const isCorrectEmailAddress = emailAddressValidation();
+  const isCorrectEmailAddress = emailAddressValidation(email);
+  const isLoading = () => {
+    return preSubmitionRequestIsLoading || afterSumbitionRequestIsLoading;
+  };
+  let showLoader = isLoading();
 
   const disableNextButton = isNextButtonDisabled();
-  return preSubmitionRequestIsLoading || afterSumbitionRequestIsLoading ? (
+  return showLoader ? (
     <Loader />
   ) : (
     <View style={mainView}>
@@ -82,7 +78,6 @@ const PreSubmition = ({navigation}: any) => {
           isCorrectEmailAddress={isCorrectEmailAddress}
         />
         <IsJokeCheckBox isJoke={isJoke} setIsJokeCheckBox={setIsJokeCheckBox} />
-
         <PublisherTypePicker
           publisherType={publisherType}
           setPublisherType={setPublisherType}

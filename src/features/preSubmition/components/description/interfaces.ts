@@ -1,4 +1,4 @@
 export type DescriptionProps = {
-  description: string | undefined;
-  setDescription: any;
+  description: string;
+  setDescription?: (value: string) => void;
 };

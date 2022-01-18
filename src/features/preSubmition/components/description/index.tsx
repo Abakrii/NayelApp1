@@ -1,12 +1,12 @@
 import React from 'react';
-
-import {View, TextInput} from 'react-native';
-import styles from '../../styels';
+import {TextInput} from 'react-native';
+import {ViewWrapper} from '../../../../core/components';
+import styles from './styles';
 import {DescriptionProps} from './interfaces';
 const Description = ({description, setDescription}: DescriptionProps) => {
-  const {textView, descriptionStyle} = styles || {};
+  const {descriptionStyle} = styles || {};
   return (
-    <View style={textView}>
+    <ViewWrapper>
       <TextInput
         multiline
         numberOfLines={4}
@@ -15,7 +15,7 @@ const Description = ({description, setDescription}: DescriptionProps) => {
         style={descriptionStyle}
         placeholder={'please enter your description'}
       />
-    </View>
+    </ViewWrapper>
   );
 };
 

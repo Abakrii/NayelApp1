@@ -4,13 +4,14 @@ import {
   GET_AFTER_SUBMITION_DATA_REQUEST_SUCCESS,
   GET_AFTER_SUBMITION_DATA_REQUEST_FAILURE,
   GET_AFTER_SUBMITION_DATA_REQUEST_AUTH_FAILED,
-} from '../actions/actionTypes';
-import {successResponse, failedResponse} from '../../network/responseStatus';
-import {getAfterSumbitDataRequest} from '../../network/Apis';
+} from './actionTypes';
+import {successResponse, failedResponse} from '../../../network/responseStatus';
+import {getAfterSumbitDataRequest} from '../network/Apis';
+import {ResponseGenerator} from '../../../network/interfaces';
 
 function* getAfterSubmitData() {
   try {
-    let result = yield getAfterSumbitDataRequest();
+    let result: ResponseGenerator = yield getAfterSumbitDataRequest();
     const {status, data} = result;
     if (successResponse.includes(status)) {
       yield put({

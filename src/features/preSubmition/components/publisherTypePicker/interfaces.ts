@@ -1,6 +1,6 @@
 export type PublisherTypePickerProps = {
   publisherType: string;
-  setPublisherType: () => void;
+  setPublisherType: any;
 };
 
 export enum PublisherTypes {

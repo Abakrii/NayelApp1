@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import styles from '../../styels';
+import styles from './styles';
 import {IsJokeCheckBoxProps} from './interfaces';
 const IsJokeCheckBox = ({isJoke, setIsJokeCheckBox}: IsJokeCheckBoxProps) => {
   const {checkboxContainer, checkbox, checkboxLabel} = styles || {};

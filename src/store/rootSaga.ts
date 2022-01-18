@@ -1,7 +1,7 @@
 import {fork} from 'redux-saga/effects';
-import {watchSendPreSubmitionDataRequest} from './preSubmitionSaga';
+import {watchSendPreSubmitionDataRequest} from '../features/preSubmition/store/sagas';
+import {watchGetAfterSubmitionDataRequest} from '../features/afterSubmition/store/sagas';
 
-import {watchGetAfterSubmitionDataRequest} from './afterSubmitionSaga';
 function* rootSaga() {
   yield fork(watchSendPreSubmitionDataRequest);
   yield fork(watchGetAfterSubmitionDataRequest);

@@ -1,5 +1,5 @@
 export type EmailAddressProps = {
   email: string | undefined;
-  onChangeMail: () => void | undefined;
+  onChangeMail: (value: string) => void | undefined;
   isCorrectEmailAddress: boolean;
 };

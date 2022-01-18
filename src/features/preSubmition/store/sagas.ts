@@ -4,10 +4,11 @@ import {
   SEND_PRE_SUBMITION_DATA_REQUEST_SUCCESS,
   SEND_PRE_SUBMITION_DATA_REQUEST_FAILURE,
   SEND_PRE_SUBMITION_DATA_REQUEST_AUTH_FAILURE,
-} from '../actions/actionTypes';
-import {successResponse, failedResponse} from '../../network/responseStatus';
-import {sendPreSubmitDataRequest} from '../../network/Apis';
-import {getDBConnection, saveFormItems} from '../../network/db-service';
+} from './actionTypes';
+import {successResponse, failedResponse} from '../../../network/responseStatus';
+import {sendPreSubmitDataRequest} from '../network/Apis';
+import {getDBConnection, saveFormItems} from '../../../network/db-service';
+import {ResponseGenerator} from '../../../network/interfaces';
 
 const addItemsToDb = async ({payloadItems}: any) => {
   try {
@@ -20,7 +21,7 @@ const addItemsToDb = async ({payloadItems}: any) => {
 function* sendPreSubmitData(action: any) {
   const {payload = {}} = action;
   try {
-    let result = yield sendPreSubmitDataRequest(payload);
+    let result: ResponseGenerator = yield sendPreSubmitDataRequest(payload);
     const {status} = result;
     if (successResponse.includes(status)) {
       addItemsToDb({payloadItems: payload});

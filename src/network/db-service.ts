@@ -3,14 +3,7 @@ import {
   openDatabase,
   SQLiteDatabase,
 } from 'react-native-sqlite-storage';
-
-export type FormItems = {
-  email: string;
-  isJoke: boolean;
-  publisherType: string;
-  description: string;
-};
-
+import {FormItems} from './interfaces';
 const tableName = 'problem3';
 
 enablePromise(true);

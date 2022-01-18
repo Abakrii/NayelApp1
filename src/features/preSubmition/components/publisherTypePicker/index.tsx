@@ -1,8 +1,8 @@
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
-import styles from '../../styels';
+import styles from './styles';
 import {PublisherTypePickerProps} from './interfaces';
-import {publisherTypeElements} from './lists';
+import {publisherTypeElements} from './utils';
 const PublisherTypePicker = ({
   publisherType,
   setPublisherType,

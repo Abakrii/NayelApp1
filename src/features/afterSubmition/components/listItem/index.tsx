@@ -1,15 +1,22 @@
 import React from 'react';
 import styles from './styles';
 import {View, Text} from 'react-native';
-const {listContainer, itemStyle} = styles;
 import {ListItemProps} from './interfaces';
+import {ListItemValues} from './utils';
+const {listContainer, itemStyle} = styles;
+
 const ListItem = (props: ListItemProps): JSX.Element => {
+  let items = ListItemValues(props);
   return (
     <View style={listContainer}>
-      <Text style={itemStyle}>userId: {props.userId}</Text>
-      <Text style={itemStyle}>id: {props.id}</Text>
-      <Text style={itemStyle}>title: {props.title}</Text>
-      <Text style={itemStyle}>body: {props.body}</Text>
+      {items.map(item => {
+        const {id, value} = item;
+        return (
+          <Text key={id} style={itemStyle}>
+            {value}
+          </Text>
+        );
+      })}
     </View>
   );
 };

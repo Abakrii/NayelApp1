@@ -1,4 +1,4 @@
 export type IsJokeCheckBoxProps = {
   isJoke: boolean;
-  setIsJokeCheckBox: () => void;
+  setIsJokeCheckBox: (value: boolean) => void;
 };

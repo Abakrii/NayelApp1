@@ -1,24 +1,24 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {PreSubmition, AfterSubmition} from '../features';
-import {PRE_SUBMITION, POST_SUBMITION} from './config';
-import {HEADER_STYLE_OBJECT} from '../core/constants/headerStyleObj';
+import {ScreensElements} from './utils';
+import {HeaderStyle} from './styles';
 const Stack = createStackNavigator();
 const NavigationStack = () => {
+  const screenElementsArray = ScreensElements();
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name={PRE_SUBMITION}
-          component={PreSubmition}
-          options={HEADER_STYLE_OBJECT}
-        />
-        <Stack.Screen
-          name={POST_SUBMITION}
-          component={AfterSubmition}
-          options={HEADER_STYLE_OBJECT}
-        />
+        {screenElementsArray.map(item => {
+          const {name, component} = item;
+          return (
+            <Stack.Screen
+              name={name}
+              component={component}
+              options={HeaderStyle}
+            />
+          );
+        })}
       </Stack.Navigator>
     </NavigationContainer>
   );
