@@ -1,2 +1,2 @@
-export const JSON_PLACEHOLDER_ENDPOINT =
+export const PLACEHOLDER_ENDPOINT =
   'https://jsonplaceholder.typicode.com/posts';

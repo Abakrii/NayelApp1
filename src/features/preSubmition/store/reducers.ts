@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   preSubmitionRequestIsLoading: false,
-  navigateToAfterSubmitionScreen: false,
+  navigateToPostSubmitionScreen: false,
 };
 
 export const preSubmitionReducer = (
@@ -25,7 +25,7 @@ export const preSubmitionReducer = (
       return {
         ...state,
         preSubmitionRequestIsLoading: false,
-        navigateToAfterSubmitionScreen: true,
+        navigateToPostSubmitionScreen: true,
       };
 
     case SEND_PRE_SUBMITION_DATA_REQUEST_FAILURE:

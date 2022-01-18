@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 import {preSubmitionReducer} from '../features/preSubmition/store/reducers';
-import {afterSubmitionReducer} from '../features/afterSubmition/store/reducers';
+import {postSubmitionReducer} from '../features/postSubmition/store/reducers';
 const rootReducer = combineReducers({
   preSubmitionReducer,
-  afterSubmitionReducer,
+  postSubmitionReducer,
 });
 
 export default rootReducer;

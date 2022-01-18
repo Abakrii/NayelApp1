@@ -1,4 +1,4 @@
-import {PreSubmition, AfterSubmition} from '../features';
+import {PreSubmition, PostSubmition} from '../features';
 import {PRE_SUBMITION, POST_SUBMITION} from './config';
 
 export const ScreensElements = () => {
@@ -11,7 +11,7 @@ export const ScreensElements = () => {
     {
       id: 2,
       name: POST_SUBMITION,
-      component: AfterSubmition,
+      component: PostSubmition,
     },
   ];
   return data;

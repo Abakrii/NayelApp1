@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {FlatList} from 'react-native';
 import ListItem from './components/listItem';
-import {afterSubmitSelector} from './store/selectors';
-const AfterSubmition: FC = (): JSX.Element => {
-  const {holeData = []} = afterSubmitSelector();
+import {postSubmitSelector} from './store/selectors';
+const PostSubmition: FC = (): JSX.Element => {
+  const {holeData = []} = postSubmitSelector();
   const renderItem = ({item}: any) => {
     return <ListItem {...item} />;
   };
@@ -17,4 +17,4 @@ const AfterSubmition: FC = (): JSX.Element => {
   );
 };
 
-export default AfterSubmition;
+export default PostSubmition;

@@ -16,8 +16,8 @@ import {
 import {PublisherTypes} from './components/publisherTypePicker/interfaces';
 import {emailAddressValidation} from './utils/validations';
 import {useNavigation} from '@react-navigation/native';
-import {afterSubmitSelector} from '../afterSubmition/store/selectors';
-import {getAfterSubmitionData} from '../afterSubmition/store/actions';
+import {postSubmitSelector} from '../postSubmition/store/selectors';
+import {getPostSubmitionData} from '../postSubmition/store/actions';
 const PreSubmition: FC = (): JSX.Element => {
   const {navigate} = useNavigation();
   const {mainView} = styles || {};
@@ -33,17 +33,17 @@ const PreSubmition: FC = (): JSX.Element => {
   };
   const {
     preSubmitionRequestIsLoading = false,
-    navigateToAfterSubmitionScreen = false,
+    navigateToPostSubmitionScreen = false,
   } = preSubmitSelector();
 
-  const {afterSumbitionRequestIsLoading = false, holeData = []} =
-    afterSubmitSelector();
+  const {postSumbitionRequestIsLoading = false, holeData = []} =
+    postSubmitSelector();
 
   useEffect(() => {
-    if (navigateToAfterSubmitionScreen) {
-      dispatch(getAfterSubmitionData());
+    if (navigateToPostSubmitionScreen) {
+      dispatch(getPostSubmitionData());
     }
-  }, [navigateToAfterSubmitionScreen]);
+  }, [navigateToPostSubmitionScreen]);
 
   useEffect(() => {
     if (holeData.length > 0) {
@@ -62,7 +62,7 @@ const PreSubmition: FC = (): JSX.Element => {
 
   const isCorrectEmailAddress = emailAddressValidation(email);
   const isLoading = () => {
-    return preSubmitionRequestIsLoading || afterSumbitionRequestIsLoading;
+    return preSubmitionRequestIsLoading || postSumbitionRequestIsLoading;
   };
   let showLoader = isLoading();
 

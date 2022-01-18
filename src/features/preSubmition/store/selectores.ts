@@ -2,15 +2,15 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../../store/rootReducer';
 
 export function preSubmitSelector() {
-  const {preSubmitionRequestIsLoading, navigateToAfterSubmitionScreen} =
+  const {preSubmitionRequestIsLoading, navigateToPostSubmitionScreen} =
     useSelector((state: RootState) => ({
       preSubmitionRequestIsLoading:
         state.preSubmitionReducer.preSubmitionRequestIsLoading,
-      navigateToAfterSubmitionScreen:
-        state.preSubmitionReducer.navigateToAfterSubmitionScreen,
+      navigateToPostSubmitionScreen:
+        state.preSubmitionReducer.navigateToPostSubmitionScreen,
     }));
   return {
     preSubmitionRequestIsLoading,
-    navigateToAfterSubmitionScreen,
+    navigateToPostSubmitionScreen,
   };
 }
